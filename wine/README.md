@@ -21,14 +21,14 @@ services:
     image: "<user>/wine:devel"
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
-      - "/tmp/.X11-unix:/tmp/.X11-unix"
+      - "/tmp/.X11-unix:/tmp/.X11-unix:ro"
       - "${HOME}/.wine:/wine"
     environment:
       WINEPREFIX: "/wine/prefix"
       WINEARCH: "win32"
       DISPLAY: "${DISPLAY}"
       HOME: "/wine"
-    user: "1000"
+    user: "1000:1000"
 ```
 
 You will need to create the directory ahead of time if you don't want `root`
