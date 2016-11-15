@@ -7,7 +7,7 @@ Super simple docker with wine.
 You can build with:
 
 ```sh
-docker build -t <user>/wine:devel .
+docker build --force-rm -t <user>/wine:devel .
 ```
 
 ## Run

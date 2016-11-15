@@ -7,7 +7,7 @@ Docker image for SimpleScreenRecorder.
 You can build with:
 
 ```sh
-docker build -t <user>/simplescreenrecorder:devel .
+docker build --force-rm -t <user>/simplescreenrecorder:devel .
 ```
 
 ## Run
@@ -37,6 +37,12 @@ services:
     user: "1000:1000"
     pid: "host"
     ipc: "host"
+```
+
+Then run:
+
+```sh
+docker-compose up simplescreenrecorder
 ```
 
 In order for the display to work you must have:
