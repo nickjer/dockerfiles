@@ -1,6 +1,7 @@
 FROM ubuntu:xenial
 MAINTAINER Jeremy Nicklas <jeremywnicklas@gmail.com>
 
+# Set up requirements
 RUN export DEBIAN_FRONTEND=noninteractive \
   && apt-get update && apt-get install --yes --no-install-recommends \
     default-jre \
@@ -17,11 +18,13 @@ RUN export DEBIAN_FRONTEND=noninteractive \
   && rm -fr /var/cache/* \
   && rm -fr /var/lib/apt/lists/*
 
-RUN mkdir /opt/plantuml \
-  && wget "https://sourceforge.net/projects/plantuml/files/plantuml.jar" --no-check-certificate -O /opt/plantuml/plantuml.jar \
-  && printf '#!/bin/sh -e\njava -jar /opt/plantuml/plantuml.jar "$@"' > /usr/local/bin/plantuml \
-  && chmod 755 /usr/local/bin/plantuml \
-  && wget -O /tmp/get-pip.py 'https://bootstrap.pypa.io/get-pip.py' \
+# Install PlantUML
+RUN wget -O /opt/plantuml.jar "https://sourceforge.net/projects/plantuml/files/plantuml.jar" --no-check-certificate \
+  && printf '#!/bin/sh -e\njava -jar /opt/plantuml.jar "$@"' > /usr/local/bin/plantuml \
+  && chmod 755 /usr/local/bin/plantuml
+
+# Install Sphinx and extras
+RUN wget -O /tmp/get-pip.py 'https://bootstrap.pypa.io/get-pip.py' \
   && python /tmp/get-pip.py \
   && rm /tmp/get-pip.py \
   && pip install Sphinx \
@@ -40,5 +43,6 @@ RUN mkdir /opt/plantuml \
     sphinxcontrib-googleanalytics \
     sphinxcontrib-googlechart \
     sphinxcontrib-googlemaps \
-    sphinxcontrib-libreoffice \
-    livereload
+    sphinxcontrib-libreoffice
+
+WORKDIR /doc
