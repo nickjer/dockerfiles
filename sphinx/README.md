@@ -58,7 +58,7 @@ example `docker-compose.yml` is seen as:
 version: "2"
 services:
   sphinx:
-    image: "nickjer/sphinx:devel"
+    image: "nickjer/sphinx"
     volumes:
       - "${PWD}:/doc"
     user: "1000:1000"
