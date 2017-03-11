@@ -39,7 +39,7 @@ docker build --force-rm -t nickjer/sphinx .
 
 ## Install
 
-``sh
+```sh
 docker pull nickjer/sphinx
 ```
 
